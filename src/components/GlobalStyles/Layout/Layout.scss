@@ -1,0 +1,20 @@
+@import '../GlobalStyles.scss';
+
+
+.App{
+    // height: 100vh; //disables window.addventListener
+    overflow-x: hidden;
+}
+
+.layout{
+    padding-left: 100px;
+    transition: padding-left 0.5s cubic-bezier(.18,.85,.9,.67) 0.1s;
+}
+
+@media screen and (max-width: 980px){
+    .layout{
+        padding-left: 0px;
+        padding-top: 100px;
+        transition: padding-left 0.5s cubic-bezier(.18,.85,.9,.67) 0.1s;
+    }
+}

@@ -1,0 +1,54 @@
+@import '../../GlobalStyles/GlobalStyles.scss';
+
+
+.services-container{
+    height: calc(100vh - 150px);
+    padding: 90px 30px 60px 30px;
+    display: flex;
+    flex-direction: column;
+
+    svg{
+        width: 40px;
+        height: 50px;
+        stroke-width: 3;
+    }
+    .row{
+        margin: 15px;
+        padding: 25px;
+        border-radius: $small-radius;
+    }
+
+    .first-section{
+        display: flex;
+        flex: 1;
+
+        .row-one{
+            flex: 0.4;
+            padding: 0 30px;
+        }
+        .row-two{
+            flex: 0.6;
+            background: $bg-gradient-light;
+        }
+    }
+    .second-section{
+        display: flex;
+        flex: 1;
+        .row-one{
+            flex: 0.6;
+            background: $bg-gradient-light;
+        }
+        .row-two{
+            flex: 0.4;
+        }
+    }
+
+}
+
+
+@media screen and (max-width: 767px){
+    .services-container{
+        height: auto;
+        padding: 30px;
+    }
+}

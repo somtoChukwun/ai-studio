@@ -1,0 +1,223 @@
+@import '../../GlobalStyles.scss';
+
+.menu-overlay{
+    // backdrop-filter: blur(6px);
+    // min-height: calc(100vh - 10px);
+    // background-color:rgb(104, 78, 104);
+    // position: fixed;
+    // top:0;
+    // left: 100px;
+    // right: 0;
+    // padding: 30px;
+}
+
+
+.menu-container{
+    position: fixed;
+    top:0;
+    left: 100px;
+    right: 0;
+    padding: 0px 50px 0px 0px;
+    min-height: calc(100vh - 60px);
+    height: calc(100vh - 10px);
+    
+
+
+    &.closed-menu{
+        transform: translateX(-130%);
+        transition: all 1s cubic-bezier(1, 0, 0, 1);
+        transition-delay: 0.8s;
+        
+        .menu-page{
+            transform: translateX(-130%);
+            transition: all 0.7s cubic-bezier(1, 0, 0, 1);
+            transition-delay: 0.1s;
+        }
+    }
+    &.open-menu{
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+       z-index: 99999;
+       background-color: $menu-shadow;
+       backdrop-filter: blur(6px);
+       
+       transform: translateX(0%);
+       transition: all 0.7s cubic-bezier(1, 0, 0, 1);
+       transition-delay: 0.1s;
+      
+       .menu-page{
+        transform: translateX(0%);
+        transition: all 0.9s cubic-bezier(1, 0, 0, 1);
+        transition-delay: 0.7s;
+        
+    }
+    }
+}
+
+.menu-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $dark-menu-shadow;
+    position: relative;
+    height: calc(100% - 30px);
+    overflow-y: scroll;
+
+    //make menu scrollable
+    min-height: calc(100% - 30px);
+    overflow: overlay;
+    padding: 20px;
+    z-index: 99000; 
+    flex:1;
+    box-shadow: 500px 0 0 0px #fff;
+
+    .menu-top-content{
+        padding-top: 120px;
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        .menu-options{
+            .menu-nav-links{
+                list-style: none;
+
+                .menu-title{
+                    font-family: "Anton", sans-serif;
+                    font-size: 4rem;
+                }
+                li{
+                    position: relative;
+                }
+                .nav-link{
+                    font-family: "Anton", sans-serif;
+                    font-size: 4rem;
+                    color: $inactive-text;
+                    
+                    span{
+                        padding-left: 20px;
+                    }
+                    &.active{
+                        color: $light-text;
+
+                        &:before{
+                           
+                        }
+                    }
+                    &:hover{
+                        color: $light-text;
+
+                        &:before{
+                            content:'';
+                            width: 4px;
+                            height: calc(100% - 40%);
+                            padding: 3px;
+                            position: absolute;
+                            margin: 5% 10px auto auto;
+                            margin-right: 10px;
+                           
+                            border-radius: 10px;
+                            background: 
+                                linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 90%),
+                                linear-gradient(127deg, rgba(5, 95, 5, 0.8), rgba(0,255,0,0) 50.71%),
+                                linear-gradient(336deg, rgba(20,215,61,.8), rgba(0,0,255,0) 70.71%);
+                            opacity:0;
+                            animation: fillDown 0.5s 0.1s;
+                            animation-fill-mode: forwards;
+                            
+                        }
+                    }
+                }
+                .menu-badge{
+                    padding-left: 5px;
+                }
+            }
+        }
+        .menu-contact-details{
+            .menu-contact-list{
+                display: flex;
+                flex-direction: column;
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    padding: 20px;
+
+                    .heading-four{
+                        letter-spacing: 0.1rem;
+                        font-family: "Anton", sans-serif;
+                    }
+                }
+            }
+        }
+    }
+    .menu-bottom-content{
+        flex: 0.3;
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+
+        .external-nav-links{
+            display: flex;
+            justify-content: flex-end;
+            list-style: none;
+
+            li{
+                padding: 10px;
+             &:hover{
+                display: inline-block;
+                opacity: 0;
+                animation: flash 1s 0.1s;
+                animation-fill-mode: forwards;
+                border-radius: 30%;
+                background: 
+                    linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 90%),
+                    linear-gradient(127deg, rgba(5, 95, 5, 0.8), rgba(0,255,0,0) 50.71%),
+                    linear-gradient(336deg, rgba(20,215,61,.8), rgba(0,0,255,0) 70.71%);
+             }   
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px){
+    .menu-top-content{
+        flex-direction: column;
+        transition: padding-left 0.5s cubic-bezier(.18,.85,.9,.67) 0.4s;
+    }
+}
+@media screen and (max-width: 980px){
+    .menu-page{
+        padding-left: 20px;
+        transition: padding-left 0.5s cubic-bezier(.18,.85,.9,.67) 0.4s;
+    }
+    .menu-container{
+        left: 0;
+        top: 100px;
+        padding: 0px;
+        height: calc(100vh - 100px);
+        min-height: calc(100vh - 100px);
+    }
+    .menu-page .menu-top-content{
+        padding-top: 20px;
+    }
+    .menu-page{
+        box-shadow: 300px 0 0 0px #fff;
+    }
+}
+
+
+@keyframes fillDown{
+    10%{
+       
+        margin: 0% 10px auto auto;
+        opacity: 0;
+    }
+    80%{
+        
+        margin: 5% 10px auto auto;
+        opacity:1;
+    }
+    100%{
+        opacity: 1;
+    }
+}

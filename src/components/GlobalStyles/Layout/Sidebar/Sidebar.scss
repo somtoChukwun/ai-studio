@@ -1,0 +1,250 @@
+@import '../../GlobalStyles.scss';
+
+.nav-overlay{
+    display: none;
+    transition: all 0.5s cubic-bezier(.18,.85,.9,.67) 0.4s;
+}
+
+.nav-container{
+    position: fixed;
+    height: 100vh;
+    
+    top: 0;
+    left: 0;
+    // min-height: 500px;
+    z-index: 99;
+
+   
+    
+    .navbar{
+        width: 100px;
+        border-right: 1px solid $light-border;
+        height: calc(100% - 40px ); //40px is a tolerance for the padding
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        background-color: $light-shadow;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        
+        button.hamburger-wrapper{
+            background-color: transparent;
+            border: none;
+        }
+
+        .hamburger-wrapper{
+            position: relative;
+            width: $dot-container;
+            height: $dot-container;
+            cursor: pointer;
+            z-index: 999999;
+
+            .hamburger-icon{
+                position: absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+
+                & > *{
+                    position: absolute;
+                    top: 50%; left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: $dot-width;
+                    height: $dot-height;
+                    background-color: $light-bg;
+                    z-index: 99999;
+                    border-radius: 30%;
+                    
+                }
+                .hamburger-dot{
+                    content:'';
+                    
+                }
+                .first-dot{
+                    // left: 20px;
+                    // top: 20px;
+                    left: calc(50% - #{$spread-width}); 
+                    top: calc(50% - #{$spread-width}); 
+                    transform: translate(-50%,-50%) ;
+                }
+                .second-dot{
+                    left: 0; 
+                    top: calc(50% - #{$spread-width}); 
+                    transform: translate(-50%,-50%) ;
+                
+                }
+                //no third dot
+                .fourth-dot{
+                    left: calc(50% - #{$spread-width}); 
+                    top: 0; 
+                    transform: translate(-50%,-50%) ;
+                }
+
+                .fifth-dot{
+                    left: 0; 
+                    top: 0; 
+                    transform: translate(-50%,-50%) ;
+                }
+
+                .sixth-dot{
+                    left: calc(50% + #{$spread-width}); 
+                    top: 0; 
+                    transform: translate(-50%,-50%) ;
+                }
+
+                .eight-dot{
+                    left: 0; 
+                    top: calc(50% + #{$spread-width}); 
+                    transform: translate(-50%,-50%) ;
+                }
+                .ninth-dot{
+                    left: calc(50% + #{$spread-width}); 
+                    top: calc(50% + #{$spread-width}); 
+                    transform: translate(-50%,-50%) ;
+                }
+
+                
+            }
+            &.clicked-button{
+                .hamburger-icon {
+                    & > *{
+                        animation: hamburgerCross 1s 0.1s;
+                        animation-fill-mode: forwards;
+                        opacity: 1;
+                        display: inline-block;
+                    }
+                    .first-dot, .second-dot, .fourth-dot{
+                        animation: rotateDot 1s 0.1s;
+                        animation-fill-mode: forwards;
+                        opacity: 1;
+                    }
+                }
+                
+            }
+        }
+        .bottom-logo{
+            transform: translateY(calc(-100% - 100%)) rotate(-90deg);
+        }
+    }
+}
+
+.dot-animate{
+   opacity: 0;
+    display: inline-block;
+    animation: flash 1s 0.1s;
+    animation-fill-mode: forwards;
+
+}
+
+@media screen and (max-width: 980px){
+    .nav-overlay{
+        display: block;
+        width: 100%;
+        height: 85px;
+        position: absolute;
+        top:0;
+        left:0;
+        backdrop-filter: blur(6px);
+        z-index: 99;
+        transition: all 0.5s cubic-bezier(.18,.85,.9,.67) 0.4s;
+    }
+
+    .nav-container{
+        transform: translate(calc(50vw - 50%), calc(-50vw + 40px)) rotate(90deg);
+        transition: transform 0.5s cubic-bezier(.18,.85,.9,.67) 0.1s;
+        height: 100vw;
+        min-height: 100vw;
+        right: 0;
+        max-width: 95px;
+        
+        .navbar{
+            width: 80px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 15px;
+            height: calc(100% - 40px );
+
+            .hamburger-wrapper{
+                width: 70px;
+                height: 70px;
+                transform: rotate(-90deg);
+            }
+            .circle-progress-bar{
+                transform: rotate(-90deg);
+            }
+        }
+        
+    }
+    
+}
+
+@for $i from 1 through 9 {
+    .dot-animate:nth-child(#{$i}n) {
+        animation-delay: #{$i * 0.1}s;
+    }
+}
+
+@keyframes hamburgerCross {
+    25% { 
+      top: calc(50% - #{$dot-width}); 
+    left: auto; 
+    bottom: auto; 
+      right: calc(50% - #{$dot-width}); 
+      height: $dot-width; 
+      width: $dot-width; 
+      transform: rotate(45deg);
+      opacity: 1;
+    }
+    50%{
+        top: calc(50% - #{$dot-width}); 
+        left: auto; 
+        bottom: auto; 
+        right: calc(50% - #{$dot-width}); 
+        height: $dot-width * 4; 
+        width: $dot-width / 2; 
+    }
+    100% { 
+        top: calc(50% - #{$dot-width}); 
+        left: auto; 
+        bottom: auto; 
+        right: calc(50% - #{$dot-width});  
+        height: $dot-width * 4; 
+        width: $dot-width / 2;  
+      opacity: 1;
+      transform: rotate(45deg);
+    }
+    
+  }
+  
+@keyframes rotateDot{
+    25% { 
+        top: calc(50% - #{$dot-width}); 
+        left: auto; 
+        bottom: auto; 
+        right: calc(50% - #{$dot-width}); 
+        height: $dot-width; 
+        width: $dot-width; 
+        transform: rotate(45deg);
+        opacity: 1;
+      }
+      50%{
+        top: calc(50% - #{$dot-width}); 
+        left: auto; 
+        bottom: auto; 
+        right: calc(50% - #{$dot-width});  
+        height: $dot-width * 4; 
+        width: $dot-width / 2; 
+      }
+      100% { 
+        top: calc(50% - #{$dot-width}); 
+        left: auto; 
+        bottom: auto; 
+        right: calc(50% - #{$dot-width});  
+        height: $dot-width * 4; 
+        width: $dot-width / 2;  
+        opacity: 1;
+        transform: rotate(135deg);
+      }
+}

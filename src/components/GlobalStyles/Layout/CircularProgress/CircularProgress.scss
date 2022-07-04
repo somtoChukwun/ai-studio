@@ -1,0 +1,31 @@
+@import '../../GlobalStyles.scss';
+
+svg#svg{
+  z-index: 9999;
+  
+    circle{
+      stroke-width: 3px;
+      stroke: $dark-shadow;
+      transition: all 0.4s cubic-bezier(.17,.67,.83,.67);
+      
+      &#bar{
+        stroke: $light-text;
+        transform-origin: center;
+      }
+    }
+  }
+  
+  .percent-display{
+    stroke-width: 0.5px;
+    transform: translate(-12%, 5%);
+    stroke: $light-text;
+    font-size: 0.5em;
+  }
+
+  @media screen and (max-width: 980px){
+    .percent-display{
+      font-size: 0.7em;
+      stroke-width: 1px;
+    }
+
+  }
